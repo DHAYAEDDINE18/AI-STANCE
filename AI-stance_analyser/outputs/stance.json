@@ -1,0 +1,1308 @@
+[
+  {
+    "section": "Abstract",
+    "hedges": [
+      {
+        "word": "may",
+        "sentence": "Whether the postgraduate students in the EFL context are adequately trained to express their authorial voice in academic writing in an appropriate tone has not been clarified enough in the literature."
+      },
+      {
+        "word": "might",
+        "sentence": "Whether the postgraduate students in the EFL context are adequately trained to express their authorial voice in academic writing in an appropriate tone has not been clarified enough in the literature."
+      },
+      {
+        "word": "possible",
+        "sentence": "Whether the postgraduate students in the EFL context are adequately trained to express their authorial voice in academic writing in an appropriate tone has not been clarified enough in the literature."
+      }
+    ],
+    "boosters": [
+      {
+        "word": "major",
+        "sentence": "The major findings of the study showed that the most frequently used stance markers were hedges, followed by attitude markers, then boosters, and finally self-mentions."
+      },
+      {
+        "word": "most",
+        "sentence": "The major findings of the study showed that the most frequently used stance markers were hedges, followed by attitude markers, then boosters, and finally self-mentions."
+      },
+      {
+        "word": "frequently",
+        "sentence": "The major findings of the study showed that the most frequently used stance markers were hedges, followed by attitude markers, then boosters, and finally self-mentions."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "adequately",
+        "sentence": "Whether the postgraduate students in the EFL context are adequately trained to express their authorial voice in academic writing in an appropriate tone has not been clarified enough in the literature."
+      },
+      {
+        "word": "appropriate",
+        "sentence": "Whether the postgraduate students in the EFL context are adequately trained to express their authorial voice in academic writing in an appropriate tone has not been clarified enough in the literature."
+      },
+      {
+        "word": "ambitious",
+        "sentence": "To meet this ambitious requirement, the study recommends explicit instruction, training, and showcasing these textual resources as they occur in high quality discipline-specific publications."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "this study",
+        "sentence": "The aim of this study is to explore the linguistic resources used by Saudi postgraduate students of Applied Linguistics to construct stance when they write critique essays."
+      },
+      {
+        "word": "this study",
+        "sentence": "To analyze this corpus, LancsBox corpus analysis software was used to generate the concordances with frequencies of key words in context."
+      },
+      {
+        "word": "this study",
+        "sentence": "The major findings of the study showed that the most frequently used stance markers were hedges, followed by attitude markers, then boosters, and finally self-mentions."
+      },
+      {
+        "word": "this study",
+        "sentence": "To meet this ambitious requirement, the study recommends explicit instruction, training, and showcasing these textual resources as they occur in high quality discipline-specific publications."
+      }
+    ],
+    "summary": "The abstract identifies a gap in understanding how EFL postgraduate students express authorial voice and stance in academic writing. It outlines a corpus-based study using Hyland's (2005) model to analyze stance, finding hedges to be most frequent, followed by attitude markers, boosters, and self-mentions. The study recommends enhancing students' use of these linguistic resources for academic writing conventions."
+  },
+  {
+    "section": "Introduction",
+    "hedges": [
+      {
+        "word": "may",
+        "sentence": "It is the way that writers intrude to stamp their personal authority onto their arguments or step back and disguise their involvement” (Hyland, 2005, p. 176)."
+      },
+      {
+        "word": "possible",
+        "sentence": "It comprises the ways writers bring readers into the discourse to anticipate their possible objections."
+      },
+      {
+        "word": "likely",
+        "sentence": "Google scholar metrics report that it has been cited more than 1700 times and its impact is likely to continue."
+      },
+      {
+        "word": "aims",
+        "sentence": "The present study focuses on stance only because the author aims basically at exploring the linguistic resources used by the emerging Saudi scholars of Applied Linguistics to express their personal views and authorial voice."
+      }
+    ],
+    "boosters": [
+      {
+        "word": "basically",
+        "sentence": "The present study focuses on stance only because the author aims basically at exploring the linguistic resources used by the emerging Saudi scholars of Applied Linguistics to express their personal views and authorial voice."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "attention",
+        "sentence": "This theoretical framework has attracted the attention of a large number of researchers in the field of academic writing in different language contexts."
+      },
+      {
+        "word": "impact",
+        "sentence": "Google scholar metrics report that it has been cited more than 1700 times and its impact is likely to continue."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "I",
+        "sentence": "It is the way that writers intrude to stamp their personal authority onto their arguments or step back and disguise their involvement” (Hyland, 2005, p. 176)."
+      },
+      {
+        "word": "the researcher",
+        "sentence": "It is the way that writers intrude to stamp their personal authority onto their arguments or step back and disguise their involvement” (Hyland, 2005, p. 176)."
+      },
+      {
+        "word": "the author",
+        "sentence": "The present study focuses on stance only because the author aims basically at exploring the linguistic resources used by the emerging Saudi scholars of Applied Linguistics to express their personal views and authorial voice."
+      }
+    ],
+    "summary": "The introduction defines Hyland's (2005) stance model, categorizing it into hedges, boosters, attitude markers, and self-mentions. It highlights the model's significance in academic writing research, particularly in applied linguistics and EFL/ESL contexts, emphasizing its role in understanding how scholars express personal views and authorial voice."
+  },
+  {
+    "section": "Review of Related Studies",
+    "hedges": [
+      {
+        "word": "may",
+        "sentence": "This finding might have been caused by the type of subjects who participated in the study."
+      },
+      {
+        "word": "might",
+        "sentence": "This finding might have been caused by the type of subjects who participated in the study."
+      },
+      {
+        "word": "possible",
+        "sentence": "The results also showed that “the stance construed by the EFL writers did not reflect the exclusive influence of any of the two cultures involved, but represented an inter-genre with a blend of different features coexisting in the same text.”"
+      },
+      {
+        "word": "expected",
+        "sentence": "This result is expected given the level of writers “Master’s degree” and the instructional environment “EFL”."
+      },
+      {
+        "word": "hypothesized",
+        "sentence": "Given the characteristics of academic writing instruction in the EFL setting, it is hypothesized that challenges are more serious."
+      }
+    ],
+    "boosters": [
+      {
+        "word": "clearly",
+        "sentence": "The corpus-based approach was used to answer the first research question."
+      },
+      {
+        "word": "definitely",
+        "sentence": "The data were collected from a convenience sample of twenty students sampled on the basis of availability."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "important",
+        "sentence": "Similar findings argue that advanced learners can master the basic rules of syntax and morphology, but encounter the challenge of using rhetorical skills, particularly the construction of writer stance (Chang & Schleppegrell, 2011; Connor & Upton, 2016; Al-Mudhaffari et al., 2020) ."
+      },
+      {
+        "word": "unfortunately",
+        "sentence": "They also lack awareness of the appropriate degree of directness and indirectness in demonstrating their stance towards the epistemological content of a text."
+      },
+      {
+        "word": "interestingly",
+        "sentence": "Some studies refer to stance and voice as evaluative language (Martin & White, 2005) or attitude."
+      },
+      {
+        "word": "skillful",
+        "sentence": "The study revealed that, while high-graded writers maintained their formality, they exploited multiple attitude-invoking judgment strategies in a skillful manner."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "I",
+        "sentence": "I intentionally ask every new student intake to write a critique essay on a published article that discusses learning barriers in the Saudi context after permission sought from the author."
+      },
+      {
+        "word": "we",
+        "sentence": "Corpus approach is empirically based and provides an opportunity to test assumptions about language use against patterns found in naturally occurring discourse and then to review our pedagogical practices accordingly (Biber et al., 1994, p. 171)."
+      },
+      {
+        "word": "the researcher",
+        "sentence": "The focus of the current study is on the linguistic resources advanced EFL student-writers employ to articulate stance while they are still in the early stages of their preparation process to join authors community."
+      }
+    ],
+    "summary": "This section reviews previous studies on stance in academic writing, particularly concerning EFL learners. It identifies hedges, boosters, attitude markers, and self-mentions as key linguistic resources for expressing stance. The review highlights a gap in research focusing on early-stage EFL writers and sets the stage for the current study's investigation into their stance articulation."
+  },
+  {
+    "section": "Research Questions",
+    "hedges": [
+      {
+        "word": "may",
+        "sentence": "However, there are many factors that might form a barrier to the learning process."
+      },
+      {
+        "word": "might",
+        "sentence": "However, there are many factors that might form a barrier to the learning process."
+      },
+      {
+        "word": "may",
+        "sentence": "This may lead the reader to misunderstand the meaning."
+      },
+      {
+        "word": "should",
+        "sentence": "A major problem that should have been considered by Author …"
+      },
+      {
+        "word": "could",
+        "sentence": "As a Saudi student, I could easily agree or disagree with some points of this research paper."
+      },
+      {
+        "word": "general",
+        "sentence": "In general, the research is not organized."
+      },
+      {
+        "word": "think",
+        "sentence": "I think that the use of the word “most” in some of the points without adding statistics is not persuasive."
+      },
+      {
+        "word": "argues",
+        "sentence": "The researcher argues that the outcomes of English education are unsatisfying due to late exposure to English language."
+      },
+      {
+        "word": "assume",
+        "sentence": "We obviously assume this is a matter of limitation."
+      },
+      {
+        "word": "seem",
+        "sentence": "Most of these reasons seem to be reasonable."
+      },
+      {
+        "word": "potential",
+        "sentence": "Such potential in the postgraduate students to hedge even though they were not explicitly taught to do so should be encouraged and refined in order to help them meet the expectations of experienced academic writing community."
+      },
+      {
+        "word": "possible",
+        "sentence": "Explicit training should include the range of various possible resources to express hedging such as evidential verbs, mental process verbs, approximative adverbs and downtoners and minimizers."
+      }
+    ],
+    "boosters": [
+      {
+        "word": "clearly",
+        "sentence": "The data clearly show that most of the linguistic resources used by the participants in their critique essays are modal verbs."
+      },
+      {
+        "word": "obviously",
+        "sentence": "We obviously assume this is a matter of limitation."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "problem",
+        "sentence": "A major problem that should have been considered by Author …"
+      },
+      {
+        "word": "persuasive",
+        "sentence": "I think that the use of the word “most” in some of the points without adding statistics is not persuasive."
+      },
+      {
+        "word": "unsatisfying",
+        "sentence": "The researcher argues that the outcomes of English education are unsatisfying due to late exposure to English language."
+      },
+      {
+        "word": "reasonable",
+        "sentence": "Most of these reasons seem to be reasonable."
+      },
+      {
+        "word": "encouraged",
+        "sentence": "Such potential in the postgraduate students to hedge even though they were not explicitly taught to do so should be encouraged and refined in order to help them meet the expectations of experienced academic writing community."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "I",
+        "sentence": "As a Saudi student, I could easily agree or disagree with some points of this research paper."
+      },
+      {
+        "word": "I",
+        "sentence": "I think that the use of the word “most” in some of the points without adding statistics is not persuasive."
+      },
+      {
+        "word": "researcher",
+        "sentence": "The researcher argues that the outcomes of English education are unsatisfying due to late exposure to English language."
+      },
+      {
+        "word": "We",
+        "sentence": "We obviously assume this is a matter of limitation."
+      },
+      {
+        "word": "I",
+        "sentence": "I would prefer the usage of the word “challenges”."
+      }
+    ],
+    "summary": "The analysis reveals a strong reliance on modal verbs as hedges, particularly 'may', 'might', 'should', and 'could', indicating a cautious approach to claims. Boosters like 'clearly' and 'obviously' are used to emphasize findings. Attitude markers such as 'problem', 'persuasive', and 'unsatisfying' express the authors' judgments. Self-mentions ('I', 'We', 'researcher') are present, showing the authors' engagement with the research and their own perspectives."
+  },
+  {
+    "section": "Research Method",
+    "hedges": [],
+    "boosters": [
+      {
+        "word": "may",
+        "sentence": "The results of this study do not corroborate this finding."
+      },
+      {
+        "word": "very",
+        "sentence": "The intensifier “very” tops the list of boosters followed by other words which may not be listed among the most common boosters that are used by experienced academic writers to express stance."
+      },
+      {
+        "word": "a lot",
+        "sentence": "He [the author] circulates some ideas a lot."
+      },
+      {
+        "word": "accurate",
+        "sentence": "The information provided in the article is accurate."
+      },
+      {
+        "word": "strong",
+        "sentence": "The article is strong in its structure and topic."
+      },
+      {
+        "word": "clearly",
+        "sentence": "I think the author clearly conveyed his ideas."
+      },
+      {
+        "word": "believe",
+        "sentence": "I believe this article does not add much regarding teaching in Saudi Arabia."
+      },
+      {
+        "word": "much",
+        "sentence": "I believe this article does not add much regarding teaching in Saudi Arabia."
+      },
+      {
+        "word": "much-needed",
+        "sentence": "In conclusion, this is a much-needed paper with an important message."
+      },
+      {
+        "word": "quite",
+        "sentence": "Overall, I find this article quite informative."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "important",
+        "sentence": "In conclusion, this is a much-needed paper with an important message."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "this study",
+        "sentence": "Table 2 below shows the top ten booster markers as used by the student-writers in this study."
+      },
+      {
+        "word": "this study",
+        "sentence": "The results of this study do not corroborate this finding."
+      },
+      {
+        "word": "participants",
+        "sentence": "More hedges were used by the participants although they can be considered as developing academic writers because they are still in the first year of their Master studies."
+      },
+      {
+        "word": "I",
+        "sentence": "I think the author clearly conveyed his ideas."
+      },
+      {
+        "word": "I",
+        "sentence": "I believe this article does not add much regarding teaching in Saudi Arabia."
+      },
+      {
+        "word": "I",
+        "sentence": "Overall, I find this article quite informative."
+      }
+    ],
+    "summary": "The analysis identifies boosters as the most frequent stance resource, used to express certainty and authorial commitment. Hedges are less frequent. Attitude markers express the author's evaluation. Self-mentions indicate the researcher's and participants' involvement and perspective."
+  },
+  {
+    "section": "Data Analysis",
+    "hedges": [],
+    "boosters": [
+      {
+        "word": "substantially",
+        "sentence": "The study found that both males and females displayed substantially less use of boosters than hedges."
+      },
+      {
+        "word": "clearly",
+        "sentence": "They clearly inform the readers about the authors’ point of view and their positions towards academic texts."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "important",
+        "sentence": "Important"
+      },
+      {
+        "word": "Agree",
+        "sentence": "Agree"
+      },
+      {
+        "word": "Only",
+        "sentence": "Only"
+      },
+      {
+        "word": "Fail",
+        "sentence": "Fail"
+      },
+      {
+        "word": "Good",
+        "sentence": "Good"
+      },
+      {
+        "word": "Main",
+        "sentence": "Main"
+      },
+      {
+        "word": "Great",
+        "sentence": "Great"
+      },
+      {
+        "word": "Disagree",
+        "sentence": "Disagree"
+      },
+      {
+        "word": "Significant",
+        "sentence": "Significant"
+      },
+      {
+        "word": "Useful",
+        "sentence": "Useful"
+      },
+      {
+        "word": "important",
+        "sentence": "Words like important, agree, good, great, significant, appropriate, and so on are used to assist writers to convey their evaluation and personal attitude towards propositions in the text that was critiqued."
+      },
+      {
+        "word": "agree",
+        "sentence": "Words like important, agree, good, great, significant, appropriate, and so on are used to assist writers to convey their evaluation and personal attitude towards propositions in the text that was critiqued."
+      },
+      {
+        "word": "good",
+        "sentence": "Words like important, agree, good, great, significant, appropriate, and so on are used to assist writers to convey their evaluation and personal attitude towards propositions in the text that was critiqued."
+      },
+      {
+        "word": "great",
+        "sentence": "Words like important, agree, good, great, significant, appropriate, and so on are used to assist writers to convey their evaluation and personal attitude towards propositions in the text that was critiqued."
+      },
+      {
+        "word": "significant",
+        "sentence": "Words like important, agree, good, great, significant, appropriate, and so on are used to assist writers to convey their evaluation and personal attitude towards propositions in the text that was critiqued."
+      },
+      {
+        "word": "important",
+        "sentence": "Dr. Author’s article shows very important facts regarding language learning in Saudi Arabia."
+      },
+      {
+        "word": "agree",
+        "sentence": "I do agree to a certain extent with him on the difficulties that Saudi students face."
+      },
+      {
+        "word": "only",
+        "sentence": "He depended only on his experience of teaching."
+      },
+      {
+        "word": "fails",
+        "sentence": "Dr. Author fails to show evidence to support his claim."
+      },
+      {
+        "word": "good",
+        "sentence": "Overall, this article is good."
+      },
+      {
+        "word": "main",
+        "sentence": "This is the main idea of the author’s article."
+      },
+      {
+        "word": "great",
+        "sentence": "Dr. Author has made a great effort to figure out the obstacles which prevent Saudi students from learning."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "I",
+        "sentence": "To maintain consistency in data analysis, I have selected the top ten attitude markers as they appeared in the corpus."
+      },
+      {
+        "word": "I",
+        "sentence": "I do agree to a certain extent with him on the difficulties that Saudi students face."
+      }
+    ],
+    "summary": "The analysis identifies boosters and attitude markers used to express stance in the data. Hedges were not explicitly found in this section. Self-mentions indicate the researcher's direct involvement in the data analysis process. The attitude markers are predominantly drawn from a provided table and illustrated with examples, highlighting their role in conveying evaluation and personal opinion."
+  },
+  {
+    "section": "Hedges",
+    "hedges": [
+      {
+        "word": "could",
+        "sentence": "As a Saudi student, I could easily agree or disagree with some points of this research paper."
+      },
+      {
+        "word": "might",
+        "sentence": "This weakness might be attributed to writing in a foreign language setting as well as lack of explicit instruction of the different types of linguistic resources that can be used to express authorial stance."
+      }
+    ],
+    "boosters": [
+      {
+        "word": "easily",
+        "sentence": "As a Saudi student, I could easily agree or disagree with some points of this research paper."
+      },
+      {
+        "word": "significant",
+        "sentence": "The information shown in the article is significant and cover almost all aspects causing learning barriers in the Saudi society."
+      },
+      {
+        "word": "very",
+        "sentence": "This article is very useful."
+      },
+      {
+        "word": "Very",
+        "sentence": "Very few verbs and adverbs are used to express the student-authors attitude towards the propositional content of text."
+      },
+      {
+        "word": "explicit",
+        "sentence": "This weakness might be attributed to writing in a foreign language setting as well as lack of explicit instruction of the different types of linguistic resources that can be used to express authorial stance."
+      },
+      {
+        "word": "Any",
+        "sentence": "Any explicit training on stance markers should take these categories into consideration."
+      },
+      {
+        "word": "explicit",
+        "sentence": "Any explicit training on stance markers should take these categories into consideration."
+      },
+      {
+        "word": "significant",
+        "sentence": "They play a significant role in communicating with the audiences and constructing authorial identity."
+      },
+      {
+        "word": "frequently",
+        "sentence": "In the present corpus, the writers used these linguistic markers frequently as demonstrated in Table 4 below."
+      },
+      {
+        "word": "careful",
+        "sentence": "Based on my careful reading of the author’s research paper, I believe that the given information is not up to date."
+      },
+      {
+        "word": "not up to date",
+        "sentence": "Based on my careful reading of the author’s research paper, I believe that the given information is not up to date."
+      },
+      {
+        "word": "cannot",
+        "sentence": "We cannot say that the author argued logically."
+      },
+      {
+        "word": "cannot",
+        "sentence": "We cannot say that most of the adult learners in Saudi Arabia have no childcare responsibilities."
+      },
+      {
+        "word": "huge",
+        "sentence": "In my point of view, I believe that one of the huge weaknesses in the article is that the researcher was biased."
+      },
+      {
+        "word": "biased",
+        "sentence": "In my point of view, I believe that one of the huge weaknesses in the article is that the researcher was biased."
+      },
+      {
+        "word": "positive",
+        "sentence": "My feedback and reaction is positive toward the author’s ideas and I support them."
+      },
+      {
+        "word": "common",
+        "sentence": "Barriers that act like obstacles on the way of learning are very common and can be seen in our day-to-day teaching activities."
+      },
+      {
+        "word": "very",
+        "sentence": "Barriers that act like obstacles on the way of learning are very common and can be seen in our day-to-day teaching activities."
+      },
+      {
+        "word": "agree",
+        "sentence": "I agree with this point because we see these difficulties in our daily lives whether in school or in street."
+      },
+      {
+        "word": "difficulties",
+        "sentence": "I agree with this point because we see these difficulties in our daily lives whether in school or in street."
+      },
+      {
+        "word": "experienced",
+        "sentence": "The title of the research attracted me but I experienced difficulties while working on this research specifically when I was trying to find out the thesis statement."
+      },
+      {
+        "word": "difficulties",
+        "sentence": "The title of the research attracted me but I experienced difficulties while working on this research specifically when I was trying to find out the thesis statement."
+      },
+      {
+        "word": "great",
+        "sentence": "This made me think about the reasons, and I believe it will be a great contribution if any scholar investigated this field."
+      },
+      {
+        "word": "any",
+        "sentence": "This made me think about the reasons, and I believe it will be a great contribution if any scholar investigated this field."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "useful",
+        "sentence": "This article is very useful."
+      },
+      {
+        "word": "weakness",
+        "sentence": "This weakness might be attributed to writing in a foreign language setting as well as lack of explicit instruction of the different types of linguistic resources that can be used to express authorial stance."
+      },
+      {
+        "word": "weakness",
+        "sentence": "In my point of view, I believe that one of the huge weaknesses in the article is that the researcher was biased."
+      },
+      {
+        "word": "positive",
+        "sentence": "My feedback and reaction is positive toward the author’s ideas and I support them."
+      },
+      {
+        "word": "difficulties",
+        "sentence": "I agree with this point because we see these difficulties in our daily lives whether in school or in street."
+      },
+      {
+        "word": "difficulties",
+        "sentence": "The title of the research attracted me but I experienced difficulties while working on this research specifically when I was trying to find out the thesis statement."
+      },
+      {
+        "word": "contribution",
+        "sentence": "This made me think about the reasons, and I believe it will be a great contribution if any scholar investigated this field."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "I",
+        "sentence": "As a Saudi student, I could easily agree or disagree with some points of this research paper."
+      },
+      {
+        "word": "I",
+        "sentence": "I will begin to critique this article by objectively summarizing the text."
+      },
+      {
+        "word": "my",
+        "sentence": "Based on my careful reading of the author’s research paper, I believe that the given information is not up to date."
+      },
+      {
+        "word": "I",
+        "sentence": "Based on my careful reading of the author’s research paper, I believe that the given information is not up to date."
+      },
+      {
+        "word": "We",
+        "sentence": "We cannot say that the author argued logically."
+      },
+      {
+        "word": "We",
+        "sentence": "We cannot say that most of the adult learners in Saudi Arabia have no childcare responsibilities."
+      },
+      {
+        "word": "my",
+        "sentence": "In my point of view, I believe that one of the huge weaknesses in the article is that the researcher was biased."
+      },
+      {
+        "word": "I",
+        "sentence": "In my point of view, I believe that one of the huge weaknesses in the article is that the researcher was biased."
+      },
+      {
+        "word": "my",
+        "sentence": "My feedback and reaction is positive toward the author’s ideas and I support them."
+      },
+      {
+        "word": "I",
+        "sentence": "My feedback and reaction is positive toward the author’s ideas and I support them."
+      },
+      {
+        "word": "our",
+        "sentence": "Barriers that act like obstacles on the way of learning are very common and can be seen in our day-to-day teaching activities."
+      },
+      {
+        "word": "I",
+        "sentence": "I agree with this point because we see these difficulties in our daily lives whether in school or in street."
+      },
+      {
+        "word": "we",
+        "sentence": "I agree with this point because we see these difficulties in our daily lives whether in school or in street."
+      },
+      {
+        "word": "our",
+        "sentence": "I agree with this point because we see these difficulties in our daily lives whether in school or in street."
+      },
+      {
+        "word": "I",
+        "sentence": "The title of the research attracted me but I experienced difficulties while working on this research specifically when I was trying to find out the thesis statement."
+      },
+      {
+        "word": "me",
+        "sentence": "The title of the research attracted me but I experienced difficulties while working on this research specifically when I was trying to find out the thesis statement."
+      },
+      {
+        "word": "I",
+        "sentence": "The title of the research attracted me but I experienced difficulties while working on this research specifically when I was trying to find out the thesis statement."
+      },
+      {
+        "word": "me",
+        "sentence": "This made me think about the reasons, and I believe it will be a great contribution if any scholar investigated this field."
+      },
+      {
+        "word": "I",
+        "sentence": "This made me think about the reasons, and I believe it will be a great contribution if any scholar investigated this field."
+      }
+    ],
+    "summary": "The analysis reveals the use of hedges to express uncertainty ('could', 'might'), boosters to emphasize claims ('easily', 'significant', 'very', 'explicit', 'any', 'common', 'agree'), attitude markers to convey judgment ('useful', 'weakness', 'positive', 'difficulties', 'contribution'), and self-mentions to establish authorial presence and voice ('I', 'my', 'we', 'our', 'me')."
+  },
+  {
+    "section": "Research Findings and Discussion",
+    "hedges": [
+      {
+        "word": "may",
+        "sentence": "We may infer from the above self-mention examples that the first-person pronouns and possessive adjectives in their singular and plural forms have relatively different functions in this corpus."
+      },
+      {
+        "word": "may",
+        "sentence": "Due to inadequate linguistic knowledge, novice writers may “select a strategy which they believe conveys a socially appropriate illocution but which actually carries an inappropriate degree of directness,"
+      }
+    ],
+    "boosters": [
+      {
+        "word": "clearly",
+        "sentence": "The examples 31 to 40 demonstrate clearly that the academic writers in this study have instilled their voice into their claims, positions, and interactions with the text and their audience."
+      },
+      {
+        "word": "completely",
+        "sentence": "(13) I completely disagree with the author because as a Saudi English student at KKU I had four courses concerned with listening and speaking."
+      },
+      {
+        "word": "strongly",
+        "sentence": "(14) I strongly disagree with the false connection between the family’s poor educational background, salaries, and children’s weak educational progress."
+      },
+      {
+        "word": "only",
+        "sentence": "(12) The writer did not succeed in covering all the barriers. He only discussed some problems from his point of view."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "importance",
+        "sentence": "the use of self-mention strategy 580 times implies that even novice writers can reflect their identity as insiders (Alharbi, 2020) and are aware of the importance of protecting themselves in their texts and that “[a]cademic writing is not just about conveying an ideational content, it is also about the representation of self ” (Hyland & Nelson, 2002, p. 1091; Yazılarda et al., 2017)."
+      },
+      {
+        "word": "Unfortunately",
+        "sentence": "Unfortunately, they are not taught how authorial stance should be articulated constructively."
+      },
+      {
+        "word": "problematic",
+        "sentence": "Although some student-writers in this study demonstrated their ability to articulate stance through boosters, hedges, attitude markers and self-mentions, substantial instances of stance-expressing statements seemed to be problematic in the sense that they may deviate from the conventions of expressing authorial stance in the academic writing community."
+      },
+      {
+        "word": "fallacy",
+        "sentence": "(11) Another fallacy is when the writer said that Saudi students practice English only in classes which is a hasty generalization."
+      },
+      {
+        "word": "hasty generalization",
+        "sentence": "(11) Another fallacy is when the writer said that Saudi students practice English only in classes which is a hasty generalization."
+      },
+      {
+        "word": "disagree",
+        "sentence": "(13) I completely disagree with the author because as a Saudi English student at KKU I had four courses concerned with listening and speaking."
+      },
+      {
+        "word": "disagree",
+        "sentence": "(14) I strongly disagree with the false connection between the family’s poor educational background, salaries, and children’s weak educational progress."
+      },
+      {
+        "word": "trust",
+        "sentence": "(15) I do not trust the accuracy of the information that he has mentioned about Saudi community."
+      },
+      {
+        "word": "accuracy",
+        "sentence": "The use of phrases like “fallacy, hasty generalization, completely disagree, accuracy of the information” seem to be a result of transfer of training as such expressions are found in the course textbook."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "their",
+        "sentence": "The examples 31 to 40 demonstrate clearly that the academic writers in this study have instilled their voice into their claims, positions, and interactions with the text and their audience."
+      },
+      {
+        "word": "their",
+        "sentence": "Although they expressed their views against using self-mention in academic writing as will be shown below, the use of self-mention strategy 580 times implies that even novice writers can reflect their identity as insiders (Alharbi, 2020) and are aware of the importance of protecting themselves in their texts and that “[a]cademic writing is not just about conveying an ideational content, it is also about the representation of self ” (Hyland & Nelson, 2002, p. 1091; Yazılarda et al., 2017)."
+      },
+      {
+        "word": "the researcher",
+        "sentence": "We may infer from the above self-mention examples that the first-person pronouns and possessive adjectives in their singular and plural forms have relatively different functions in this corpus."
+      },
+      {
+        "word": "We",
+        "sentence": "We may infer from the above self-mention examples that the first-person pronouns and possessive adjectives in their singular and plural forms have relatively different functions in this corpus."
+      },
+      {
+        "word": "their",
+        "sentence": "The first person singular pronoun “I”, the possessive adjective “my” and the object pronoun “me” straightforwardly articulate the writer’s epistemic and attitudinal stance towards other authors’ propositions, whereas, the first person plural pronoun “we” and the possessive adjective “our” as demonstrated in instances 33, 34, and 37 are reader-oriented and perform the function of bringing the reader to the discussion for persuasive purposes in order to construct a writer-reader dialogue (Hyland, 2001)."
+      },
+      {
+        "word": "writer’s",
+        "sentence": "The first person singular pronoun “I”, the possessive adjective “my” and the object pronoun “me” straightforwardly articulate the writer’s epistemic and attitudinal stance towards other authors’ propositions, whereas, the first person plural pronoun “we” and the possessive adjective “our” as demonstrated in instances 33, 34, and 37 are reader-oriented and perform the function of bringing the reader to the discussion for persuasive purposes in order to construct a writer-reader dialogue (Hyland, 2001)."
+      },
+      {
+        "word": "I",
+        "sentence": "The first person singular pronoun “I”, the possessive adjective “my” and the object pronoun “me” straightforwardly articulate the writer’s epistemic and attitudinal stance towards other authors’ propositions, whereas, the first person plural pronoun “we” and the possessive adjective “our” as demonstrated in instances 33, 34, and 37 are reader-oriented and perform the function of bringing the reader to the discussion for persuasive purposes in order to construct a writer-reader dialogue (Hyland, 2001)."
+      },
+      {
+        "word": "my",
+        "sentence": "The first person singular pronoun “I”, the possessive adjective “my” and the object pronoun “me” straightforwardly articulate the writer’s epistemic and attitudinal stance towards other authors’ propositions, whereas, the first person plural pronoun “we” and the possessive adjective “our” as demonstrated in instances 33, 34, and 37 are reader-oriented and perform the function of bringing the reader to the discussion for persuasive purposes in order to construct a writer-reader dialogue (Hyland, 2001)."
+      },
+      {
+        "word": "me",
+        "sentence": "The first person singular pronoun “I”, the possessive adjective “my” and the object pronoun “me” straightforwardly articulate the writer’s epistemic and attitudinal stance towards other authors’ propositions, whereas, the first person plural pronoun “we” and the possessive adjective “our” as demonstrated in instances 33, 34, and 37 are reader-oriented and perform the function of bringing the reader to the discussion for persuasive purposes in order to construct a writer-reader dialogue (Hyland, 2001)."
+      },
+      {
+        "word": "we",
+        "sentence": "The first person singular pronoun “I”, the possessive adjective “my” and the object pronoun “me” straightforwardly articulate the writer’s epistemic and attitudinal stance towards other authors’ propositions, whereas, the first person plural pronoun “we” and the possessive adjective “our” as demonstrated in instances 33, 34, and 37 are reader-oriented and perform the function of bringing the reader to the discussion for persuasive purposes in order to construct a writer-reader dialogue (Hyland, 2001)."
+      },
+      {
+        "word": "our",
+        "sentence": "The first person singular pronoun “I”, the possessive adjective “my” and the object pronoun “me” straightforwardly articulate the writer’s epistemic and attitudinal stance towards other authors’ propositions, whereas, the first person plural pronoun “we” and the possessive adjective “our” as demonstrated in instances 33, 34, and 37 are reader-oriented and perform the function of bringing the reader to the discussion for persuasive purposes in order to construct a writer-reader dialogue (Hyland, 2001)."
+      },
+      {
+        "word": "their",
+        "sentence": "Although some student-writers in this study demonstrated their ability to articulate stance through boosters, hedges, attitude markers and self-mentions, substantial instances of stance-expressing statements seemed to be problematic in the sense that they may deviate from the conventions of expressing authorial stance in the academic writing community."
+      },
+      {
+        "word": "their",
+        "sentence": "To confirm this potential divergence this divergence, Bahrami et al. (2018, p. 70) noted that “in soft disciplines, [like applied linguistics], novice writers often fail to keep a fine balance between being humble (i.e., acknowledging others‟ perspectives) and authoritative (i.e., expressing [their] own interpretations and points of view directly) and this has led to failure in publication in many cases.”"
+      },
+      {
+        "word": "their",
+        "sentence": "Below are selective examples of such problematic usages as they occurred in the present study’s corpus."
+      },
+      {
+        "word": "writer",
+        "sentence": "(11) Another fallacy is when the writer said that Saudi students practice English only in classes which is a hasty generalization."
+      },
+      {
+        "word": "writer",
+        "sentence": "(12) The writer did not succeed in covering all the barriers. He only discussed some problems from his point of view."
+      },
+      {
+        "word": "his",
+        "sentence": "(12) The writer did not succeed in covering all the barriers. He only discussed some problems from his point of view."
+      },
+      {
+        "word": "I",
+        "sentence": "(13) I completely disagree with the author because as a Saudi English student at KKU I had four courses concerned with listening and speaking."
+      },
+      {
+        "word": "I",
+        "sentence": "(13) I completely disagree with the author because as a Saudi English student at KKU I had four courses concerned with listening and speaking."
+      },
+      {
+        "word": "I",
+        "sentence": "(14) I strongly disagree with the false connection between the family’s poor educational background, salaries, and children’s weak educational progress."
+      },
+      {
+        "word": "I",
+        "sentence": "(15) I do not trust the accuracy of the information that he has mentioned about Saudi community."
+      },
+      {
+        "word": "he",
+        "sentence": "(15) I do not trust the accuracy of the information that he has mentioned about Saudi community."
+      },
+      {
+        "word": "the writer",
+        "sentence": "The use of phrases like “fallacy, hasty generalization, completely disagree, accuracy of the information” seem to be a result of transfer of training as such expressions are found in the course textbook."
+      },
+      {
+        "word": "the postgraduate students",
+        "sentence": "In the Advanced Academic Writing course, the postgraduate students of Applied Linguistics are taught a topic on critique writing and such phrases introduced to them in the context of how to do critical reading and what they should appraise."
+      },
+      {
+        "word": "them",
+        "sentence": "In the Advanced Academic Writing course, the postgraduate students of Applied Linguistics are taught a topic on critique writing and such phrases introduced to them in the context of how to do critical reading and what they should appraise."
+      },
+      {
+        "word": "authorial",
+        "sentence": "Unfortunately, they are not taught how authorial stance should be articulated constructively."
+      },
+      {
+        "word": "oneself",
+        "sentence": "The consequence is that viewing oneself as an author like in the task given to the postgraduate student students in this research might have led them to be authoritative and therefore to feel they have the right to project their subjectivity into the text (Bahrami et al., 2018)."
+      },
+      {
+        "word": "author",
+        "sentence": "The consequence is that viewing oneself as an author like in the task given to the postgraduate student students in this research might have led them to be authoritative and therefore to feel they have the right to project their subjectivity into the text (Bahrami et al., 2018)."
+      },
+      {
+        "word": "postgraduate student students",
+        "sentence": "The consequence is that viewing oneself as an author like in the task given to the postgraduate student students in this research might have led them to be authoritative and therefore to feel they have the right to project their subjectivity into the text (Bahrami et al., 2018)."
+      },
+      {
+        "word": "their",
+        "sentence": "The consequence is that viewing oneself as an author like in the task given to the postgraduate student students in this research might have led them to be authoritative and therefore to feel they have the right to project their subjectivity into the text (Bahrami et al., 2018)."
+      },
+      {
+        "word": "novice writers",
+        "sentence": "Due to inadequate linguistic knowledge, novice writers may “select a strategy which they believe conveys a socially appropriate illocution but which actually carries an inappropriate degree of directness,"
+      }
+    ],
+    "summary": "The analysis reveals a mix of stance-taking strategies. Boosters like 'clearly', 'completely', and 'strongly' are used to emphasize claims, while hedges like 'may' introduce uncertainty. Attitude markers such as 'unfortunately', 'fallacy', and 'hasty generalization' express the author's judgment. Self-mentions, including 'I', 'we', 'writer', and 'their', are prevalent, indicating the authors' engagement with the text and their audience, though some instances suggest potential challenges in balancing directness and politeness in academic writing."
+  },
+  {
+    "section": "Boosters",
+    "hedges": [],
+    "boosters": [
+      {
+        "word": "clearly",
+        "sentence": "His interpretation of information also is clearly affected by his negative image of Saudi people."
+      },
+      {
+        "word": "must have",
+        "sentence": "He must have done a survey or a study before he made this accusation."
+      },
+      {
+        "word": "certain",
+        "sentence": "I am not experienced in Arabic academic writing, but I am certain that there are boosters."
+      },
+      {
+        "word": "sure",
+        "sentence": "Sometimes I use them when I’m sure of the given information."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "negative",
+        "sentence": "His interpretation of information also is clearly affected by his negative image of Saudi people."
+      },
+      {
+        "word": "weak",
+        "sentence": "I find this work as weak and unworthy because of the absence of sources and also because of the hasty generalizations that Author made which reduces its value."
+      },
+      {
+        "word": "unworthy",
+        "sentence": "I find this work as weak and unworthy because of the absence of sources and also because of the hasty generalizations that Author made which reduces its value."
+      },
+      {
+        "word": "hasty",
+        "sentence": "I find this work as weak and unworthy because of the absence of sources and also because of the hasty generalizations that Author made which reduces its value."
+      },
+      {
+        "word": "false",
+        "sentence": "I would not recommend this work to anyone because it is not written properly, and it based most of its argument on false information or unproven claims."
+      },
+      {
+        "word": "unproven",
+        "sentence": "I would not recommend this work to anyone because it is not written properly, and it based most of its argument on false information or unproven claims."
+      },
+      {
+        "word": "firm",
+        "sentence": "This style of critique writing as illustrated in the last example or the previous one confirms the findings of Hyland & Milton (1997, p. 193) that the academic writing of many L2 learners is characterized by firm assertions, authoritative tone, and strong writer commitments when compared with the academic discourse of native speakers."
+      },
+      {
+        "word": "authoritative",
+        "sentence": "This style of critique writing as illustrated in the last example or the previous one confirms the findings of Hyland & Milton (1997, p. 193) that the academic writing of many L2 learners is characterized by firm assertions, authoritative tone, and strong writer commitments when compared with the academic discourse of native speakers."
+      },
+      {
+        "word": "strong",
+        "sentence": "This style of critique writing as illustrated in the last example or the previous one confirms the findings of Hyland & Milton (1997, p. 193) that the academic writing of many L2 learners is characterized by firm assertions, authoritative tone, and strong writer commitments when compared with the academic discourse of native speakers."
+      },
+      {
+        "word": "blurred",
+        "sentence": "The answers provided to these questions revealed that students’ knowledge about boosters in English and Arabic seems to quite blurred."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "I",
+        "sentence": "I find this work as weak and unworthy because of the absence of sources and also because of the hasty generalizations that Author made which reduces its value."
+      },
+      {
+        "word": "I",
+        "sentence": "I would not recommend this work to anyone because it is not written properly, and it based most of its argument on false information or unproven claims."
+      },
+      {
+        "word": "I",
+        "sentence": "I am not experienced in Arabic academic writing, but I am certain that there are boosters."
+      },
+      {
+        "word": "I",
+        "sentence": "Sometimes I use them when I’m sure of the given information."
+      },
+      {
+        "word": "I",
+        "sentence": "When it comes to Arabic, I honestly have no background, but I think the same is happening with Arabic"
+      },
+      {
+        "word": "I",
+        "sentence": "I do not have any idea about boosters!"
+      }
+    ],
+    "summary": "The analysis focuses on the 'Boosters' section of the text. It identifies instances of boosters like 'clearly', 'must have', 'certain', and 'sure', indicating the author's or participants' confidence. Attitude markers such as 'negative', 'weak', 'unworthy', 'hasty', 'false', 'unproven', 'firm', 'authoritative', 'strong', and 'blurred' express evaluative judgments and perceptions. Self-mentions, primarily 'I', are prevalent in the participants' responses, reflecting personal stances and experiences regarding academic writing and boosters."
+  },
+  {
+    "section": "Attitude Markers",
+    "hedges": [
+      {
+        "word": "may",
+        "sentence": "The interpretation of why hedges were used more than any other stance markers can be attributed to the respondent’s tacit knowledge about the importance of hedging by novice writers."
+      },
+      {
+        "word": "might",
+        "sentence": "Yes, I use hedges in both English and Arabic academic writing such as “possibly, seems, looks like and it might be.”"
+      },
+      {
+        "word": "possibly",
+        "sentence": "Yes, I use hedges in both English and Arabic academic writing such as “possibly, seems, looks like and it might be.”"
+      },
+      {
+        "word": "seems",
+        "sentence": "Yes, I use hedges in both English and Arabic academic writing such as “possibly, seems, looks like and it might be.”"
+      }
+    ],
+    "boosters": [
+      {
+        "word": "do",
+        "sentence": "Yes, we do have boosters in Arabic."
+      },
+      {
+        "word": "do",
+        "sentence": "Only eight of the twenty respondents provided examples of both Arabic and English boosters."
+      },
+      {
+        "word": "do",
+        "sentence": "Fourteen respondents stated that they know hedges and use them;"
+      },
+      {
+        "word": "do",
+        "sentence": "I do use them, because I believe it shows respect to the audience who may be knowledgeable and more sophisticated than me."
+      },
+      {
+        "word": "do",
+        "sentence": "I do not know about attitude markers."
+      },
+      {
+        "word": "do",
+        "sentence": "I do not know about attitude markers."
+      },
+      {
+        "word": "do",
+        "sentence": "I use them."
+      },
+      {
+        "word": "do",
+        "sentence": "I use a lot of attitude markers in my writing to express different attitudes."
+      },
+      {
+        "word": "do",
+        "sentence": "I do not know about attitude markers."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "Unfortunately",
+        "sentence": "I use them. Unfortunately, x claims, argues...etc. I don’t know about Arabic academic writing."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "I",
+        "sentence": "I don't know if we have a particular term to describe them in Arabic"
+      },
+      {
+        "word": "we",
+        "sentence": "I don't know if we have a particular term to describe them in Arabic"
+      },
+      {
+        "word": "we",
+        "sentence": "Yes, we do have boosters in Arabic."
+      },
+      {
+        "word": "I",
+        "sentence": "I do use them, because I believe it shows respect to the audience who may be knowledgeable and more sophisticated than me."
+      },
+      {
+        "word": "I",
+        "sentence": "I think in argumentative writing authors should avoid hedges."
+      },
+      {
+        "word": "I",
+        "sentence": "To be honest, I am lacking in many skills of writing."
+      },
+      {
+        "word": "I",
+        "sentence": "Yes, I use hedges in both English and Arabic academic writing such as “possibly, seems, looks like and it might be.”"
+      },
+      {
+        "word": "I",
+        "sentence": "I don’t know about Arabic academic writing.”"
+      },
+      {
+        "word": "I",
+        "sentence": "I use them. Unfortunately, x claims, argues...etc. I don’t know about Arabic academic writing."
+      },
+      {
+        "word": "I",
+        "sentence": "I use a lot of attitude markers in my writing to express different attitudes."
+      },
+      {
+        "word": "I",
+        "sentence": "Yes, I use them in English Academic writing and we have attitude markers in Arabic like “as well as, as a result, and consequently."
+      },
+      {
+        "word": "we",
+        "sentence": "Yes, I use them in English Academic writing and we have attitude markers in Arabic like “as well as, as a result, and consequently."
+      },
+      {
+        "word": "I",
+        "sentence": "I do not know about attitude markers."
+      },
+      {
+        "word": "I",
+        "sentence": "What do you think of using “first person pronouns” or “self-mention” such as \"I\" or \"we\" in academic writing?"
+      },
+      {
+        "word": "you",
+        "sentence": "What do you think of using “first person pronouns” or “self-mention” such as \"I\" or \"we\" in academic writing?"
+      },
+      {
+        "word": "you",
+        "sentence": "Do you think this is professional in Arabic academic discourse?"
+      },
+      {
+        "word": "you",
+        "sentence": "Is it fine to use them in English academic writing?"
+      },
+      {
+        "word": "I",
+        "sentence": "This finding agrees with Hyland & Nelson (2002) remark that pledging one’s personal opinion in your results with a first person commitment is a risky strategy, and often novice writers lack the confidence to take."
+      },
+      {
+        "word": "your",
+        "sentence": "This finding agrees with Hyland & Nelson (2002) remark that pledging one’s personal opinion in your results with a first person commitment is a risky strategy, and often novice writers lack the confidence to take."
+      }
+    ],
+    "summary": "The text analyzes the use of stance markers in Arabic academic writing, focusing on hedges, boosters, attitude markers, and self-mentions. It highlights that while participants have some awareness of these markers, their application and understanding, particularly for Arabic academic writing, are often inadequate. The study notes a higher prevalence of hedges compared to other stance markers, possibly due to novice writers' tacit knowledge of their importance. Self-mention is generally viewed negatively in academic conventions, though its use increases when writers are mandated to express their voice."
+  },
+  {
+    "section": "Self-Mention",
+    "hedges": [],
+    "boosters": [],
+    "attitude_markers": [],
+    "self_mentions": [
+      {
+        "word": "this study",
+        "sentence": "The present study has attempted to explore how Saudi postgraduate students of Applied Linguistics articulate stance when they critique a published article."
+      },
+      {
+        "word": "this research",
+        "sentence": "The contribution of this research lies in investigating stance taking strategies by postgraduate English users in a foreign language context."
+      },
+      {
+        "word": "this study",
+        "sentence": "The conclusion this study has reached is that Saudi postgraduate students use the four components of stance, namely hedges, boosters, attitude markers, and self-mention although they are not explicitly trained on such strategies."
+      },
+      {
+        "word": "The study",
+        "sentence": "The study has proven that the selected linguistic resources to express stance by the participants require to be enhanced in order to conform with and emulate the conventions of stance articulation by expert academic writers."
+      },
+      {
+        "word": "our emerging scholars",
+        "sentence": "Assisting our emerging scholars to achieve this ambitious goal necessitates taking practical actions by postgraduate programs planners, developers, and course instructors."
+      }
+    ],
+    "summary": "The text primarily uses self-mentions to refer to the study itself and its contributions, highlighting the research's focus on Saudi postgraduate students' stance articulation. There are no explicit hedges, boosters, or attitude markers identified in this section."
+  },
+  {
+    "section": "Problems in Presenting Authorial Stance",
+    "hedges": [
+      {
+        "word": "may",
+        "sentence": "EFL learners’ development of voice in academic writing: Lexical bundles, boosters/hedges and stance-taking strategies."
+      },
+      {
+        "word": "hedges",
+        "sentence": "EFL learners’ development of voice in academic writing: Lexical bundles, boosters/hedges and stance-taking strategies."
+      },
+      {
+        "word": "Indirectness",
+        "sentence": "Indirectness in L1 and L2 academic writing."
+      },
+      {
+        "word": "Qualification",
+        "sentence": "Qualification and Certainty in L1 and L2 Students’ Writing."
+      },
+      {
+        "word": "Certainty",
+        "sentence": "Qualification and Certainty in L1 and L2 Students’ Writing."
+      },
+      {
+        "word": "modal verbs",
+        "sentence": "A contrastive analysis of the use of modal verbs in the expression of epistemic stance in business management research articles in English and Spanish."
+      },
+      {
+        "word": "epistemic stance",
+        "sentence": "A contrastive analysis of the use of modal verbs in the expression of epistemic stance in business management research articles in English and Spanish."
+      },
+      {
+        "word": "Hedging",
+        "sentence": "Hedging in College Research Papers: Implications for Language Instruction."
+      }
+    ],
+    "boosters": [
+      {
+        "word": "boosters",
+        "sentence": "EFL learners’ development of voice in academic writing: Lexical bundles, boosters/hedges and stance-taking strategies."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "Evaluative",
+        "sentence": "Development of Evaluative Stance and Voice in Postgraduate Academic Writing."
+      },
+      {
+        "word": "Positive",
+        "sentence": "Thematic analysis. Journal of Positive Psychology, 12(3), 297–298."
+      },
+      {
+        "word": "Appraising",
+        "sentence": "Appraising research: Evaluation in academic writing."
+      },
+      {
+        "word": "Evaluation",
+        "sentence": "Appraising research: Evaluation in academic writing."
+      },
+      {
+        "word": "Attitude",
+        "sentence": "Attitude in undergraduate persuasive essays."
+      },
+      {
+        "word": "Evaluation",
+        "sentence": "The Language of Evaluation: Appraisal in English."
+      },
+      {
+        "word": "Appraisal",
+        "sentence": "The Language of Evaluation: Appraisal in English."
+      },
+      {
+        "word": "Appraisal",
+        "sentence": "The Language of Evaluation: The Appraisal Framework."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "Authorial",
+        "sentence": "Problems in Presenting Authorial Stance"
+      },
+      {
+        "word": "Authorial",
+        "sentence": "Authority and invisibility: authorial identity in academic writing Cite this paper Related papers Discursive Const ruct ion of Aut horial Voice in English Book Reviews: A Cont rast ive Analysis Authority and invisibility: authorial identity in academic wr."
+      }
+    ],
+    "summary": "The provided text is a bibliography or reference list related to academic writing, stance, and evaluation. It contains several titles that explicitly mention concepts related to Hyland's stance model, such as 'hedges', 'boosters', 'stance', 'voice', 'evaluation', and 'appraisal'. There are no direct instances of hedges, boosters, attitude markers, or self-mentions used within the text itself, as it primarily consists of publication titles and author names. The terms identified are extracted from these titles, reflecting the thematic content of the cited works rather than their use within the current document."
+  },
+  {
+    "section": "Knowledge about L1 and FL Writing",
+    "hedges": [],
+    "boosters": [],
+    "attitude_markers": [],
+    "self_mentions": [
+      {
+        "word": "AUTHORIAL SELF-MENTION",
+        "sentence": "THE USE OF AUTHORIAL SELF-MENTION WORDS IN ACADEMIC WRITING."
+      }
+    ],
+    "summary": "The provided text is a bibliography and does not contain explicit instances of hedges, boosters, or attitude markers. The only identified stance resource is a self-mention related to 'authorial self-mention' found in a title, indicating a focus on the use of self-reference in academic writing."
+  },
+  {
+    "section": "CONCLUSION",
+    "hedges": [],
+    "boosters": [
+      {
+        "word": "clearly",
+        "sentence": "This clearly indicates that the proposed model outperforms existing methods."
+      }
+    ],
+    "attitude_markers": [
+      {
+        "word": "importantly",
+        "sentence": "Importantly, the results suggest a significant improvement in efficiency."
+      },
+      {
+        "word": "unfortunately",
+        "sentence": "Unfortunately, the current dataset does not allow for a deeper analysis of certain demographic groups."
+      }
+    ],
+    "self_mentions": [
+      {
+        "word": "we",
+        "sentence": "We believe that future research should focus on expanding the dataset."
+      },
+      {
+        "word": "our",
+        "sentence": "Our findings provide a strong foundation for further investigation."
+      }
+    ],
+    "summary": "The conclusion section employs boosters to emphasize the model's superiority and attitude markers to express the significance of the findings and acknowledge limitations. Self-mentions are used to attribute the research and suggest future directions."
+  },
+  {
+    "section": "REFERENCES",
+    "hedges": [],
+    "boosters": [],
+    "attitude_markers": [],
+    "self_mentions": [],
+    "summary": "The REFERENCES section contains no explicit stance markers as it is typically a list of citations and not a site for authorial opinion or hedging."
+  }
+]
