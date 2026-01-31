@@ -1,7 +1,6 @@
 """
 analysis.py - Core analysis functions with logging and error handling
 """
-import csv
 import json
 import logging
 import re
@@ -10,12 +9,14 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
+
 from .prompts import (
-    SEGMENT_SYSTEM, SEGMENT_USER_TEMPLATE, STANCE_SYSTEM, STANCE_USER_TEMPLATE,
-    QUERY_SYSTEM, QUERY_USER_TEMPLATE
+    STANCE_SYSTEM, STANCE_USER_TEMPLATE
 )
 from .ai_clients import GeminiClient
-from .pdf_utils import chunk_text_for_model
+
+from .html_report import generate_html_report
 
 
 # --- Logging Configuration ---
@@ -48,28 +49,13 @@ def setup_logger(output_folder: str = "outputs") -> logging.Logger:
     logger.setLevel(logging.DEBUG)
     logger.handlers.clear()  # Remove any existing handlers
     
-    # File handler - detailed logs
-    file_handler = logging.FileHandler(log_file, encoding="utf-8")
-    file_handler.setLevel(logging.DEBUG)
-    file_formatter = logging.Formatter(
-        "%(asctime)s | %(levelname)-8s | %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S"
-    )
-    file_handler.setFormatter(file_formatter)
-    
     # Console handler - important messages only
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)
+    console_handler.setLevel(logging.CRITICAL + 1)
     console_formatter = logging.Formatter("%(levelname)s: %(message)s")
     console_handler.setFormatter(console_formatter)
     
-    logger.addHandler(file_handler)
     logger.addHandler(console_handler)
-    
-    logger.info("=" * 70)
-    logger.info("PDF Text Chunking & Stance Analysis Session Started")
-    logger.info(f"Log file: {log_file}")
-    logger.info("=" * 70)
     
     _logger = logger
     return logger
@@ -199,8 +185,100 @@ def parse_json_str(s: str) -> Any:
         return json.loads(candidate)
     except json.JSONDecodeError as e:
         logger.error(f"JSON parsing failed: {e}")
-        logger.debug(f"Problematic JSON string: {s[:500]}...")
+        logger.debug(f"Problematic JSON string: {s}")
         raise
+
+
+# --- Semantic Text Sectioning ---
+SECTION_HEADINGS = {
+    "introduction": r"^\s*introduction\s*$",
+    "literature_review": r"^\s*literature\s+review\s*$",
+    "methodology": r"^\s*(methodology|methods)\s*$",
+    "results": r"^\s*(results|findings)\s*$",
+    "discussion": r"^\s*discussion\s*$",
+    "conclusion": r"^\s*(conclusion|conclusions)\s*$",
+    "general_conclusion": r"^\s*general\s+conclusion\s*$",
+    "references": r"^\s*(references|bibliography)\s*$",
+    "appendices": r"^\s*(appendices|appendix)\s*$",
+}
+
+def split_text_into_sections(
+    full_text: str,
+    chunk_size: int = 80000,
+    overlap: int = 1000
+) -> list[dict[str, Any]]:
+    """
+    Splits text into sections based on detected headings, falling back to chunking.
+
+    Args:
+        full_text: The entire document text.
+        chunk_size: Target size for chunks if no sections are found.
+        overlap: Overlap for character-based chunking.
+
+    Returns:
+        A list of dictionaries, each representing a section or chunk.
+    """
+    logger = get_logger()
+    logger.info("Attempting to split text by semantic sections...")
+
+    # Find all potential headings
+    found_headings = []
+    # Use re.finditer to get all matches with their positions
+    for name, pattern in SECTION_HEADINGS.items():
+        for match in re.finditer(pattern, full_text, re.IGNORECASE | re.MULTILINE):
+            # Check if the matched line is short enough to be a heading
+            line = match.group(0).strip()
+            if len(line) < 50: # A reasonable max length for a heading
+                 found_headings.append({
+                    "title": name.replace("_", " ").title(),
+                    "text": line,
+                    "start_pos": match.start(),
+                })
+
+    # Sort headings by their position in the text
+    found_headings.sort(key=lambda x: x["start_pos"])
+
+    # Remove overlapping/duplicate headings
+    unique_headings = []
+    last_pos = -1
+    for heading in found_headings:
+        if heading["start_pos"] > last_pos:
+            unique_headings.append(heading)
+            last_pos = heading["start_pos"]
+
+    if len(unique_headings) > 1:
+        logger.info(f"Found {len(unique_headings)} section headings. Splitting text...")
+        sections = []
+        for i, heading in enumerate(unique_headings):
+            start_pos = heading["start_pos"]
+            # Determine end position
+            if i + 1 < len(unique_headings):
+                end_pos = unique_headings[i+1]["start_pos"]
+            else:
+                end_pos = len(full_text)
+            
+            section_text = full_text[start_pos:end_pos].strip()
+            
+            # Page number calculation for the section
+            page_pattern = re.compile(r"<<PAGE\s+(\d+)>>")
+            section_pages = [int(m.group(1)) for m in page_pattern.finditer(section_text)]
+            start_page = min(section_pages) if section_pages else 0
+            end_page = max(section_pages) if section_pages else 0
+
+            sections.append({
+                "title": heading["title"],
+                "start_page": start_page,
+                "end_page": end_page,
+                "text": section_text,
+                "char_count": len(section_text),
+                "chunk_number": i + 1,
+            })
+            logger.info(f"  ✓ Created section: '{heading['title']}' ({len(section_text):,} chars)")
+        return sections
+    else:
+        logger.warning("No clear section headings found. Falling back to fixed-size chunking.")
+        # Fallback to original chunking logic if no sections are detected
+        return split_text_into_chunks(full_text, chunk_size, overlap)
 
 
 # --- Simple Text Chunking (No AI Segmentation) ---
@@ -222,7 +300,7 @@ def split_text_into_chunks(
         List of chunk dictionaries with text and metadata
     """
     logger = get_logger()
-    logger.info(f"Splitting text into fixed-size chunks...")
+    logger.info("Splitting text into fixed-size chunks...")
     logger.info(f"  Chunk size: {chunk_size:,} chars, Overlap: {overlap} chars")
     
     # Extract page information
@@ -371,8 +449,8 @@ def process_pdf_to_chunks(
     overlap: int = 1000
 ) -> dict[str, Any]:
     """
-    Simple pipeline: PDF → Text → Fixed-size Chunks → Files
-    No AI segmentation - just split by character count.
+    Simple pipeline: PDF → Text → Fixed-size Chunks → Files.
+    Organizes outputs into a directory named after the PDF.
     
     Args:
         pdf_path: Path to source PDF file
@@ -386,17 +464,21 @@ def process_pdf_to_chunks(
     logger = get_logger()
     logger.info("=" * 70)
     logger.info(f"Starting PDF chunking pipeline: {pdf_path}")
-    logger.info(f"Chunk size: {chunk_size:,} chars, Overlap: {overlap} chars")
-    logger.info("=" * 70)
     
     from .pdf_utils import save_pdf_as_text
     
-    # Get PDF name
+    # Create a dedicated directory for this PDF's output
     pdf_name = Path(pdf_path).stem
+    pdf_output_dir = Path(output_base) / pdf_name
+    pdf_output_dir.mkdir(parents=True, exist_ok=True)
+    logger.info(f"Output for this PDF will be saved in: {pdf_output_dir}")
+    
+    logger.info(f"Chunk size: {chunk_size:,} chars, Overlap: {overlap} chars")
+    logger.info("=" * 70)
     
     # Step 1: Convert PDF to text
     logger.info("STEP 1: Converting PDF to text file...")
-    text_file = save_pdf_as_text(pdf_path, output_dir=str(Path(output_base) / "converted_PDFs"))
+    text_file = save_pdf_as_text(pdf_path, output_dir=str(pdf_output_dir))
     
     # Load the text
     with open(text_file, "r", encoding="utf-8") as f:
@@ -404,25 +486,25 @@ def process_pdf_to_chunks(
     
     logger.info(f"✓ Loaded text: {len(full_text):,} characters")
     
-    # Step 2: Split into fixed-size chunks
-    logger.info("STEP 2: Splitting text into chunks (no AI segmentation)...")
-    chunks = split_text_into_chunks(full_text, chunk_size=chunk_size, overlap=overlap)
-    logger.info(f"✓ Created {len(chunks)} chunks")
+    # Step 2: Split into sections/chunks
+    logger.info("STEP 2: Splitting text into sections...")
+    chunks = split_text_into_sections(full_text, chunk_size=chunk_size, overlap=overlap)
+    logger.info(f"✓ Created {len(chunks)} sections/chunks")
     
     # Step 3: Save each chunk to individual file
     logger.info("STEP 3: Saving chunks as individual text files...")
     chunk_files = save_chunks_to_files(
         chunks=chunks,
         pdf_name=pdf_name,
-        base_dir=output_base
+        base_dir=str(pdf_output_dir)
     )
     
     # Summary
     logger.info("=" * 70)
-    logger.info("Pipeline complete!")
+    logger.info("Chunking complete for this PDF!")
     logger.info(f"  Text file: {text_file}")
     logger.info(f"  Chunks: {len(chunk_files)} files")
-    logger.info(f"  Chunk directory: {Path(output_base) / f'{pdf_name}_sections'}")
+    logger.info(f"  Chunk directory: {pdf_output_dir / f'{pdf_name}_sections'}")
     logger.info("=" * 70)
     
     return {
@@ -430,7 +512,7 @@ def process_pdf_to_chunks(
         "text_file": text_file,
         "chunks": chunks,
         "chunk_files": chunk_files,
-        "chunk_directory": str(Path(output_base) / f"{pdf_name}_sections"),
+        "chunk_directory": str(pdf_output_dir / f"{pdf_name}_sections"),
         "total_chunks": len(chunk_files)
     }
 
@@ -459,7 +541,7 @@ def process_pdf_to_sections(
     """
     logger = get_logger()
     if model_name:
-        logger.info(f"ℹ model_name parameter ignored (no AI segmentation used)")
+        logger.info("ℹ model_name parameter ignored (no AI segmentation used)")
     
     result = process_pdf_to_chunks(pdf_path, output_base, chunk_size, overlap)
     
@@ -526,7 +608,7 @@ def ai_analyse_stance(
             prompt,
             system_instruction=STANCE_SYSTEM,
             temperature=0.2,
-            max_output_tokens=12000,
+            max_output_tokens=16000,
         )
     
     try:
@@ -626,6 +708,7 @@ def analyze_chunks_for_stance(
             # Add metadata
             stance_result["chunk_file"] = chunk_path.name
             stance_result["chunk_number"] = chunk_num
+            stance_result["word_count"] = len(chunk_text.split())
             
             all_stance_results.append(stance_result)
             successful += 1
@@ -637,6 +720,14 @@ def analyze_chunks_for_stance(
     
     logger.info(f"Analysis complete. Success: {successful}/{len(chunk_files)}, Failed: {failed}")
     
+    # Clean up empty 'sentence' fields before saving
+    for result in all_stance_results:
+        for category in ["hedges", "boosters", "attitude_markers", "self_mentions"]:
+            if category in result:
+                for marker_data in result[category]:
+                    if "sentence" in marker_data and not marker_data["sentence"]:
+                        del marker_data["sentence"]
+
     # Save results
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -647,10 +738,10 @@ def analyze_chunks_for_stance(
         json.dump(all_stance_results, f, indent=2, ensure_ascii=False)
     logger.info(f"✓ Saved JSON: {json_file}")
     
-    # CSV output (flattened)
-    csv_file = output_path / "stance_results.csv"
-    save_stance_to_csv(all_stance_results, str(csv_file))
-    logger.info(f"✓ Saved CSV: {csv_file}")
+    # Excel output (flattened)
+    excel_file = output_path / "stance_results.xlsx"
+    save_stance_to_excel(all_stance_results, str(excel_file))
+    logger.info(f"✓ Saved Excel: {excel_file}")
     
     # Summary
     total_markers = sum(
@@ -662,7 +753,7 @@ def analyze_chunks_for_stance(
     )
     
     logger.info("=" * 70)
-    logger.info(f"Stance analysis summary:")
+    logger.info("Stance analysis summary:")
     logger.info(f"  Total chunks analyzed: {successful}")
     logger.info(f"  Total stance markers: {total_markers}")
     logger.info(f"  Results saved to: {output_dir}")
@@ -671,76 +762,63 @@ def analyze_chunks_for_stance(
     return {
         "results": all_stance_results,
         "json_file": str(json_file),
-        "csv_file": str(csv_file),
+        "excel_file": str(excel_file),
         "total_chunks": successful,
         "total_markers": total_markers,
         "failed_chunks": failed
     }
 
 
-def save_stance_to_csv(results: list[dict[str, Any]], csv_path: str):
+def save_stance_to_excel(results: list[dict[str, Any]], excel_path: str):
     """
-    Save stance results to CSV with flattened structure.
+    Save stance results to Excel with a flattened structure.
     
     Args:
-        results: List of stance result dictionaries
-        csv_path: Output CSV file path
+        results: List of stance result dictionaries.
+        excel_path: Output Excel file path.
     """
     logger = get_logger()
     
     rows = []
     for result in results:
-        chunk_num = result.get("chunk_number", 0)
-        chunk_file = result.get("chunk_file", "")
-        section = result.get("section", "")
-        
         # Flatten each category
         for category in ["hedges", "boosters", "attitude_markers", "self_mentions"]:
             markers = result.get(category, [])
+            
             for marker in markers:
+                row_data = {
+                    "hyland_category": category,
+                    "marker": "",
+                    "context": ""
+                }
+                
                 if isinstance(marker, dict):
-                    rows.append({
-                        "chunk_number": chunk_num,
-                        "chunk_file": chunk_file,
-                        "section": section,
-                        "category": category,
+                    row_data.update({
                         "marker": marker.get("marker", marker.get("text", "")),
-                        "sentence": marker.get("sentence", ""),
                         "context": marker.get("context", "")
                     })
                 else:
                     # Handle simple string markers
-                    rows.append({
-                        "chunk_number": chunk_num,
-                        "chunk_file": chunk_file,
-                        "section": section,
-                        "category": category,
-                        "marker": str(marker),
-                        "sentence": "",
-                        "context": ""
-                    })
+                    row_data["marker"] = str(marker)
+                
+                rows.append(row_data)
     
     if not rows:
-        logger.warning("⚠ No stance markers to save to CSV")
-        # Create empty CSV with headers
-        rows = [{
-            "chunk_number": 0,
-            "chunk_file": "",
-            "section": "",
-            "category": "",
-            "marker": "",
-            "sentence": "",
-            "context": ""
-        }]
+        logger.warning("⚠ No stance markers to save. Creating an empty Excel file with headers.")
+        df = pd.DataFrame(columns=[
+            "hyland_category", "marker", "context"
+        ])
+    else:
+        df = pd.DataFrame(rows)
     
-    fieldnames = ["chunk_number", "chunk_file", "section", "category", "marker", "sentence", "context"]
-    
-    with open(csv_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-    
-    logger.info(f"✓ Saved {len(rows)} stance markers to CSV")
+    try:
+        df.to_excel(excel_path, index=False, engine='openpyxl')
+        logger.info(f"✓ Saved {len(df)} stance markers to Excel: {excel_path}")
+    except Exception as e:
+        logger.error(f"✗ Failed to save Excel: {e}")
+
+
+
 
 
 def process_pdf_with_stance_analysis(
@@ -751,7 +829,7 @@ def process_pdf_with_stance_analysis(
     model_name: str | None = None
 ) -> dict[str, Any]:
     """
-    Complete pipeline: PDF → Chunks → Stance Analysis
+    Complete pipeline: PDF → Chunks → Stance Analysis → Optional Diagnostic Analysis
     
     Args:
         pdf_path: Path to source PDF file
@@ -759,6 +837,7 @@ def process_pdf_with_stance_analysis(
         chunk_size: Maximum characters per chunk
         overlap: Character overlap between chunks
         model_name: Gemini model name for stance analysis
+        do_diagnostics: Whether to perform diagnostic analysis
         
     Returns:
         Dictionary with all results and file paths
@@ -776,24 +855,49 @@ def process_pdf_with_stance_analysis(
         overlap=overlap
     )
     
+    # The output directory is now inside the chunk_result, but let's create it here
+    # to be explicit.
+    pdf_name = Path(pdf_path).stem
+    pdf_output_dir = Path(output_base) / pdf_name
+    pdf_output_dir.mkdir(parents=True, exist_ok=True)
+
+
     # Step 2: Analyze stance on chunks
     stance_result = analyze_chunks_for_stance(
         chunk_files=chunk_result["chunk_files"],
-        output_dir=output_base,
+        output_dir=str(pdf_output_dir),
         model_name=model_name
     )
     
     # Combine results
     final_result = {
         **chunk_result,
+        "results": stance_result["results"],
         "stance_json": stance_result["json_file"],
-        "stance_csv": stance_result["csv_file"],
+        "stance_excel": stance_result["excel_file"],
         "total_markers": stance_result["total_markers"],
         "failed_chunks": stance_result["failed_chunks"]
     }
     
+
+
+    # Rename fields for backward compatibility, ensuring consistent output
+    final_result["sections"] = final_result.pop("chunks", [])
+    final_result["section_files"] = final_result.pop("chunk_files", [])
+    final_result["section_directory"] = final_result.pop("chunk_directory", "")
+    
+    # Save the final result with diagnostics to the JSON file
+    with open(stance_result["json_file"], "w", encoding="utf-8") as f:
+        json.dump(final_result, f, indent=2, ensure_ascii=False)
+        
+    # Generate HTML report
+    html_report_path = str(Path(stance_result["json_file"]).with_suffix(".html"))
+    generate_html_report(stance_result["json_file"], html_report_path)
+    final_result["html_report"] = html_report_path
+    
     logger.info("=" * 70)
     logger.info("Complete pipeline finished!")
+    logger.info(f"HTML report generated at: {html_report_path}")
     logger.info("=" * 70)
     
     return final_result

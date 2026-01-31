@@ -1,6 +1,7 @@
 import os
 import time
 import random
+from src.config import MODEL_CONFIG
 
 USE_NEW_CLIENT = os.getenv("USE_NEW_GENAI", "1") == "1"
 
@@ -15,6 +16,8 @@ class GeminiClient:
         self.api_key = os.getenv("GEMINI_API_KEY")
         if not self.api_key:
             raise RuntimeError("GEMINI_API_KEY not set in environment")
+
+        self.max_output_tokens = MODEL_CONFIG.get(self.model_name, {}).get("max_output_tokens", 20000)
 
         if USE_NEW_CLIENT:
             from google import genai
@@ -71,7 +74,42 @@ class GeminiClient:
         if err_last:
             raise err_last
 
-    def generate_json(self, prompt: str, system_instruction: str = None, temperature: float = 0.2, max_output_tokens: int = 20000):
+    def generate_content(self, prompt: str, system_instruction: str = None, temperature: float = 0.2, max_output_tokens: int = None):
+        if max_output_tokens is None:
+            max_output_tokens = self.max_output_tokens
+        
+        contents = (system_instruction + "\n\n" + prompt) if system_instruction else prompt
+        
+        def call_once_text(model):
+            if self.mode == "new":
+                return self.client.models.generate_content(
+                    model=model,
+                    contents=contents,
+                    config={
+                        "temperature": temperature,
+                        "max_output_tokens": max_output_tokens,
+                    },
+                ).text
+            else:
+                mdl = self.model if model == self.model_name else self.genai.GenerativeModel(model)
+                return mdl.generate_content(
+                    contents,
+                    generation_config={
+                        "temperature": temperature,
+                        "max_output_tokens": max_output_tokens,
+                    },
+                ).text
+
+        try:
+            return self._retry_wrapper(call_once_text, self.model_name)
+        except Exception:
+            if FALLBACK_MODEL and FALLBACK_MODEL != self.model_name:
+                return call_once_text(FALLBACK_MODEL)
+            raise
+
+    def generate_json(self, prompt: str, system_instruction: str = None, temperature: float = 0.2, max_output_tokens: int = None):
+        if max_output_tokens is None:
+            max_output_tokens = self.max_output_tokens
         contents = (system_instruction + "\n\n" + prompt) if system_instruction else prompt
         try:
             return self._retry_wrapper(self._call_once, self.model_name, contents, system_instruction=None, temperature=temperature, max_output_tokens=max_output_tokens)
@@ -86,8 +124,10 @@ class GeminiClient:
         instruction: str,
         system_instruction: str | None = None,
         temperature: float = 0.1,
-        max_output_tokens: int = 20000,
+        max_output_tokens: int = None,
     ):
+        if max_output_tokens is None:
+            max_output_tokens = self.max_output_tokens
         if self.mode != "new":
             # Legacy SDK fallback: concatenate system + instruction as plain text
             merged = (system_instruction + "\n\n" + instruction) if system_instruction else instruction
@@ -116,7 +156,7 @@ class GeminiClient:
             ).text
 
         try:
-            return self._with_retry(lambda: call(self.model_name))
+            return self._retry_wrapper(lambda: call(self.model_name))
         except Exception:
             from os import getenv
             fallback = getenv("GEMINI_FALLBACK_MODEL", "gemini-2.0-flash")

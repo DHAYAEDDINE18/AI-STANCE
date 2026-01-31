@@ -3,13 +3,15 @@ app.py - GUI for PDF chunking and optional stance analysis
 """
 import os
 import threading
+import webbrowser
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog, scrolledtext
 from pathlib import Path
 
+from src.web_server import start_server
 from src.analysis import (
-    setup_logger, 
-    process_pdf_to_sections, 
+    setup_logger,
+    process_pdf_to_sections,
     process_pdf_with_stance_analysis,
     get_logger
 )
@@ -52,14 +54,16 @@ class App(tk.Tk):
         initial_key = read_api_key_from_file()
 
         # Variables
-        self.pdf_path = tk.StringVar()
+        self.pdf_paths = []
         self.out_dir = tk.StringVar(value="outputs")
         self.chunk_size = tk.IntVar(value=80000)
         self.overlap = tk.IntVar(value=1000)
         self.analyze_stance = tk.BooleanVar(value=False)
-        self.model_name = tk.StringVar(value="gemini-3-pro-preview")
+        self.do_process_all = tk.BooleanVar(value=False)
+        self.model_name = tk.StringVar(value="gemini-pro") # Changed default model
         self.api_key = tk.StringVar(value=initial_key)
         self.api_show = tk.BooleanVar(value=False)
+        self.report_path = None
 
         # Build UI
         self._build_ui()
@@ -71,9 +75,26 @@ class App(tk.Tk):
         """Build the GUI layout."""
         pad = {"padx": 10, "pady": 8}
         
-        # Main frame
-        main_frame = ttk.Frame(self)
-        main_frame.pack(fill="both", expand=True, padx=10, pady=10)
+        # Create a scrollable main frame
+        container = ttk.Frame(self)
+        container.pack(fill="both", expand=True)
+
+        canvas = tk.Canvas(container)
+        scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
+        main_frame = ttk.Frame(canvas, padding=(10, 10))
+
+        main_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(
+                scrollregion=canvas.bbox("all")
+            )
+        )
+
+        canvas.create_window((0, 0), window=main_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
 
         # Title
         title_label = ttk.Label(
@@ -92,16 +113,22 @@ class App(tk.Tk):
         )
         subtitle_label.grid(row=1, column=0, columnspan=3, pady=(0, 15))
 
-        # PDF file selection
-        ttk.Label(main_frame, text="PDF file:", font=("Arial", 10)).grid(
-            row=2, column=0, sticky="w", **pad
-        )
-        ttk.Entry(main_frame, textvariable=self.pdf_path, width=60).grid(
-            row=2, column=1, sticky="we", **pad
-        )
-        ttk.Button(main_frame, text="Browse...", command=self.browse_pdf).grid(
-            row=2, column=2, sticky="e", **pad
-        )
+        # PDF file selection frame
+        pdf_frame = ttk.LabelFrame(main_frame, text="PDF Files", padding=10)
+        pdf_frame.grid(row=2, column=0, columnspan=3, sticky="ew", **pad)
+        pdf_frame.columnconfigure(0, weight=1)
+
+        self.pdf_listbox = tk.Listbox(pdf_frame, height=5)
+        self.pdf_listbox.grid(row=0, column=0, columnspan=3, sticky="nsew", pady=5)
+        pdf_frame.rowconfigure(0, weight=1)
+
+
+        pdf_button_frame = ttk.Frame(pdf_frame)
+        pdf_button_frame.grid(row=1, column=0, columnspan=3, sticky="w")
+
+        ttk.Button(pdf_button_frame, text="Add PDFs...", command=self.add_pdfs).pack(side=tk.LEFT, padx=(0, 5))
+        ttk.Button(pdf_button_frame, text="Remove Selected", command=self.remove_selected_pdfs).pack(side=tk.LEFT, padx=5)
+        ttk.Button(pdf_button_frame, text="Clear All", command=self.clear_all_pdfs).pack(side=tk.LEFT, padx=5)
 
         # Output folder
         ttk.Label(main_frame, text="Output folder:", font=("Arial", 10)).grid(
@@ -175,24 +202,27 @@ class App(tk.Tk):
         )
         stance_check.grid(row=10, column=0, columnspan=3, sticky="w", **pad)
 
+
+        
         # Model selection (initially disabled)
         model_frame = ttk.Frame(main_frame)
-        model_frame.grid(row=11, column=0, columnspan=3, sticky="w", **pad)
+        model_frame.grid(row=12, column=0, columnspan=3, sticky="w", **pad)
         
         self.model_label = ttk.Label(model_frame, text="Gemini model:", state="disabled")
         self.model_label.pack(side=tk.LEFT)
         
-        self.model_entry = ttk.Entry(
+        self.model_entry = ttk.Combobox(
             model_frame,
             textvariable=self.model_name,
-            width=30,
-            state="disabled"
+            width=28, # Adjusted width for Combobox
+            state="disabled",
+            values=['gemini-pro', 'gemini-ultra', 'gemini-3-pro-preview', 'gemini-3-flash-preview', 'gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash'] # Updated model list
         )
         self.model_entry.pack(side=tk.LEFT, padx=(10, 0))
 
         # Separator
         ttk.Separator(main_frame, orient="horizontal").grid(
-            row=12, column=0, columnspan=3, sticky="we", pady=15
+            row=13, column=0, columnspan=3, sticky="we", pady=15
         )
 
         # API Key section
@@ -200,10 +230,10 @@ class App(tk.Tk):
             main_frame,
             text="Gemini API Key:",
             font=("Arial", 10, "bold")
-        ).grid(row=13, column=0, columnspan=3, sticky="w", **pad)
+        ).grid(row=14, column=0, columnspan=3, sticky="w", **pad)
         
         key_subframe = ttk.Frame(main_frame)
-        key_subframe.grid(row=14, column=0, columnspan=3, sticky="w", **pad)
+        key_subframe.grid(row=15, column=0, columnspan=3, sticky="w", **pad)
         
         self.api_entry = ttk.Entry(key_subframe, textvariable=self.api_key, width=40, show="•")
         self.api_entry.pack(side=tk.LEFT)
@@ -236,28 +266,41 @@ class App(tk.Tk):
             font=("Arial", 8),
             foreground="gray"
         )
-        api_note.grid(row=15, column=0, columnspan=3, sticky="w", padx=(10, 0))
+        api_note.grid(row=16, column=0, columnspan=3, sticky="w", padx=(10, 0))
 
         # Separator
         ttk.Separator(main_frame, orient="horizontal").grid(
-            row=16, column=0, columnspan=3, sticky="we", pady=15
+            row=17, column=0, columnspan=3, sticky="we", pady=15
         )
 
-        # Run button
+        # Run and View buttons
+        action_frame = ttk.Frame(main_frame)
+        action_frame.grid(row=18, column=0, columnspan=3, pady=10, sticky="we")
+        action_frame.columnconfigure(0, weight=1)
+        action_frame.columnconfigure(1, weight=1)
+
         self.run_btn = ttk.Button(
-            main_frame,
+            action_frame,
             text="▶ Process PDF",
             command=self.start_run,
             style="Accent.TButton"
         )
-        self.run_btn.grid(row=17, column=0, columnspan=3, pady=10, sticky="we")
+        self.run_btn.grid(row=0, column=0, sticky="we", padx=(0, 5))
+
+        self.view_report_btn = ttk.Button(
+            action_frame,
+            text="📄 View Report",
+            command=self.view_report,
+            state="disabled"
+        )
+        self.view_report_btn.grid(row=0, column=1, sticky="we", padx=(5, 0))
 
         # Progress section
         ttk.Label(main_frame, text="Progress:", font=("Arial", 10)).grid(
-            row=18, column=0, sticky="w", **pad
+            row=19, column=0, sticky="w", **pad
         )
         self.progress_label = ttk.Label(main_frame, text="Ready", foreground="blue")
-        self.progress_label.grid(row=18, column=1, sticky="w")
+        self.progress_label.grid(row=19, column=1, sticky="w")
         
         self.pb = ttk.Progressbar(
             main_frame,
@@ -266,11 +309,11 @@ class App(tk.Tk):
             length=600,
             maximum=100
         )
-        self.pb.grid(row=19, column=0, columnspan=3, sticky="we", **pad)
+        self.pb.grid(row=20, column=0, columnspan=3, sticky="we", **pad)
 
         # Status log
         ttk.Label(main_frame, text="Status Log:", font=("Arial", 10)).grid(
-            row=20, column=0, sticky="nw", **pad
+            row=21, column=0, sticky="nw", **pad
         )
         self.status = scrolledtext.ScrolledText(
             main_frame,
@@ -279,17 +322,18 @@ class App(tk.Tk):
             wrap="word",
             font=("Consolas", 9)
         )
-        self.status.grid(row=21, column=0, columnspan=3, sticky="nswe", **pad)
+        self.status.grid(row=22, column=0, columnspan=3, sticky="nswe", **pad)
 
         # Configure grid weights for resizing
         main_frame.grid_columnconfigure(1, weight=1)
-        main_frame.grid_rowconfigure(21, weight=1)
+        main_frame.grid_rowconfigure(22, weight=1)
 
     def toggle_stance_options(self):
         """Enable/disable stance analysis options."""
         state = "normal" if self.analyze_stance.get() else "disabled"
         self.model_label.config(state=state)
         self.model_entry.config(state=state)
+
 
     def toggle_show(self):
         """Toggle API key visibility."""
@@ -320,15 +364,37 @@ class App(tk.Tk):
             messagebox.showwarning("No key found", f"No API key found in {KEY_FILE}")
             self.log_status(f"⚠ No key found in {KEY_FILE}")
 
-    def browse_pdf(self):
-        """Browse for PDF file."""
-        filename = filedialog.askopenfilename(
-            title="Select PDF document",
+    def add_pdfs(self):
+        """Browse for multiple PDF files and add them to the list."""
+        filenames = filedialog.askopenfilenames(
+            title="Select PDF documents",
             filetypes=[("PDF files", "*.pdf"), ("All files", "*.*")]
         )
-        if filename:
-            self.pdf_path.set(filename)
-            self.log_status(f"Selected PDF: {Path(filename).name}")
+        if filenames:
+            for fn in filenames:
+                if fn not in self.pdf_paths:
+                    self.pdf_paths.append(fn)
+                    self.pdf_listbox.insert(tk.END, Path(fn).name)
+            self.log_status(f"Added {len(filenames)} PDF(s). Total: {len(self.pdf_paths)}")
+
+    def remove_selected_pdfs(self):
+        """Remove selected PDFs from the list."""
+        selected_indices = self.pdf_listbox.curselection()
+        if not selected_indices:
+            messagebox.showwarning("No selection", "Please select PDFs to remove.")
+            return
+        
+        for i in reversed(selected_indices):
+            del self.pdf_paths[i]
+            self.pdf_listbox.delete(i)
+        self.log_status(f"Removed {len(selected_indices)} PDF(s).")
+
+    def clear_all_pdfs(self):
+        """Clear all PDFs from the list."""
+        if self.pdf_paths and messagebox.askyesno("Confirm", "Are you sure you want to remove all PDFs?"):
+            self.pdf_paths.clear()
+            self.pdf_listbox.delete(0, tk.END)
+            self.log_status("Cleared all PDFs.")
 
     def browse_outdir(self):
         """Browse for output directory."""
@@ -353,8 +419,8 @@ class App(tk.Tk):
         self.update_idletasks()
 
     def start_run(self):
-        """Start the processing pipeline."""
-        pdf = self.pdf_path.get().strip()
+        """Start the processing pipeline for all selected PDFs."""
+        pdfs = self.pdf_paths
         outdir = self.out_dir.get().strip() or "outputs"
         chunk_size = self.chunk_size.get()
         overlap = self.overlap.get()
@@ -362,8 +428,8 @@ class App(tk.Tk):
         model = self.model_name.get().strip() if do_stance else None
 
         # Validation
-        if not pdf or not os.path.isfile(pdf):
-            messagebox.showerror("Missing PDF", "Please select a valid PDF file.")
+        if not pdfs:
+            messagebox.showerror("Missing PDF", "Please add at least one PDF file to the list.")
             return
 
         if chunk_size < 1000:
@@ -374,110 +440,131 @@ class App(tk.Tk):
             messagebox.showerror("Invalid overlap", "Overlap must be smaller than chunk size.")
             return
 
-        # API key validation for stance analysis
         key = read_api_key_from_file()
         if do_stance and not key:
             messagebox.showerror(
                 "Missing API key",
-                f"Stance analysis requires an API key.\nPlease save your Gemini API key first."
+                "Stance analysis requires an API key.\nPlease save your Gemini API key first."
             )
             return
 
         if key:
             os.environ["GEMINI_API_KEY"] = key
 
-        # Reinitialize logger
         setup_logger(outdir)
 
-        # Disable UI during processing
         self.run_btn.config(state="disabled")
         self.set_progress(0, "Starting...")
         self.status.delete(1.0, tk.END)
-        self.log_status("=" * 70)
-        self.log_status(f"PDF: {Path(pdf).name}")
+        self.log_status("=" * 80)
+        self.log_status(f"Starting batch processing for {len(pdfs)} PDF(s)...")
         self.log_status(f"Output: {outdir}")
         self.log_status(f"Chunk size: {chunk_size:,} chars, Overlap: {overlap:,} chars")
         self.log_status(f"Stance analysis: {'✓ Enabled' if do_stance else '✗ Disabled'}")
         if do_stance:
-            self.log_status(f"Model: {model}")
-        self.log_status("=" * 70)
+            self.log_status(f"  - Model: {model}")
+
+        self.log_status("=" * 80)
 
         def worker():
-            """Background worker thread."""
-            try:
-                if do_stance:
-                    # Full pipeline with stance analysis
-                    self.after(0, self.set_progress, 20, "Extracting PDF...")
-                    self.after(0, self.log_status, "▶ Step 1: Extracting PDF text...")
+            """Background worker thread to process multiple PDFs."""
+            total_files = len(pdfs)
+            completed_files = 0
+            total_errors = 0
+            summary_messages = []
 
-                    self.after(0, self.set_progress, 40, "Chunking text...")
-                    self.after(0, self.log_status, "▶ Step 2: Creating chunks...")
-                    
-                    self.after(0, self.set_progress, 60, "Analyzing stance...")
-                    self.after(0, self.log_status, "▶ Step 3: Analyzing stance markers...")
-                    
-                    result = process_pdf_with_stance_analysis(
-                        pdf_path=pdf,
-                        output_base=outdir,
-                        chunk_size=chunk_size,
-                        overlap=overlap,
-                        model_name=model
-                    )
-                    
-                    # Stance-specific results
-                    self.after(0, self.log_status, f"\n✓ Stance markers found: {result.get('total_markers', 0):,}")
-                    self.after(0, self.log_status, f"✓ Stance JSON: {result.get('stance_json', 'N/A')}")
-                    self.after(0, self.log_status, f"✓ Stance CSV: {result.get('stance_csv', 'N/A')}")
-                    
-                else:
-                    # Chunking only
-                    self.after(0, self.set_progress, 30, "Extracting PDF...")
-                    self.after(0, self.log_status, "▶ Step 1: Extracting PDF text...")
-
-                    self.after(0, self.set_progress, 70, "Chunking text...")
-                    self.after(0, self.log_status, "▶ Step 2: Creating chunks...")
-                    
-                    result = process_pdf_to_sections(
-                        pdf_path=pdf,
-                        output_base=outdir,
-                        model_name=None,
-                        chunk_size=chunk_size,
-                        overlap=overlap
-                    )
-
-                # Common results
-                self.after(0, self.set_progress, 100, "Complete!")
+            for i, pdf_path in enumerate(pdfs):
+                file_progress_start = (i / total_files) * 100
+                file_progress_end = ((i + 1) / total_files) * 100
                 
-                self.after(0, self.log_status, "\n" + "=" * 70)
-                self.after(0, self.log_status, "✓ PROCESSING COMPLETE!")
-                self.after(0, self.log_status, f"✓ Text file: {result['text_file']}")
-                self.after(0, self.log_status, f"✓ Chunks: {result.get('total_chunks', len(result.get('section_files', [])))}")
-                self.after(0, self.log_status, f"✓ Directory: {result['section_directory']}")
-                self.after(0, self.log_status, "=" * 70)
+                try:
+                    self.after(0, self.set_progress, int(file_progress_start), f"Starting {Path(pdf_path).name} ({i+1}/{total_files})")
+                    self.after(0, self.log_status, f"\n--- Processing file {i+1}/{total_files}: {Path(pdf_path).name} ---")
 
-                # Success message
-                num_chunks = result.get('total_chunks', len(result.get('section_files', [])))
-                msg = f"✓ Processing complete!\n\nChunks: {num_chunks}\nLocation: {result['section_directory']}"
+                    if do_stance:
+                        self.after(0, self.log_status, "▶ Step 1: Extracting, chunking, and analyzing stance...")
+                        result = process_pdf_with_stance_analysis(
+                            pdf_path=pdf_path,
+                            output_base=outdir,
+                            chunk_size=chunk_size,
+                            overlap=overlap,
+                                            model_name=model                        )
+                        self.after(0, self.log_status, f"  ✓ Stance markers found: {result.get('total_markers', 0):,}")
+                    else:
+                        self.after(0, self.log_status, "▶ Step 1: Extracting and chunking text...")
+                        result = process_pdf_to_sections(
+                            pdf_path=pdf_path,
+                            output_base=outdir,
+                            model_name=None,
+                            chunk_size=chunk_size,
+                            overlap=overlap
+                        )
+
+                    self.after(0, self.log_status, f"  ✓ Text file: {result['text_file']}")
+                    self.after(0, self.log_status, f"  ✓ Chunks created: {result.get('total_chunks', len(result.get('section_files', [])))}")
+                    self.after(0, self.log_status, f"  ✓ Output directory: {result['section_directory']}")
+                    
+                    num_chunks = result.get('total_chunks', len(result.get('section_files', [])))
+                    msg = f"✓ {Path(pdf_path).name}: {num_chunks} chunks created."
+                    if do_stance:
+                        msg += f" Found {result.get('total_markers', 0):,} stance markers."
+                        if result.get("html_report"):
+                            self.report_path = result["html_report"]
+                            self.after(0, lambda: self.view_report_btn.config(state="normal"))
+                    summary_messages.append(msg)
+                    completed_files += 1
+
+                except Exception as e:
+                    total_errors += 1
+                    logger = get_logger()
+                    logger.error(f"Pipeline failed for {pdf_path}: {e}", exc_info=True)
+                    self.after(0, self.log_status, f"\n✗ ERROR processing {Path(pdf_path).name}: {e}")
+                    summary_messages.append(f"✗ {Path(pdf_path).name}: FAILED - {e}")
                 
-                if do_stance:
-                    msg += f"\n\nStance markers found: {result.get('total_markers', 0):,}"
-                    msg += f"\nResults: stance_results.csv"
-                
-                self.after(0, lambda: messagebox.showinfo("Success", msg))
+                self.after(0, self.set_progress, int(file_progress_end))
 
-            except Exception as e:
-                logger = get_logger()
-                logger.error(f"Pipeline failed: {e}", exc_info=True)
-                
-                self.after(0, self.log_status, f"\n✗ ERROR: {str(e)}")
-                self.after(0, self.set_progress, 0, "Failed")
-                self.after(0, lambda: messagebox.showerror("Error", f"Processing failed:\n\n{str(e)}"))
+            # Final summary
+            self.after(0, self.set_progress, 100, "Batch complete!")
+            self.after(0, self.log_status, "\n" + "=" * 80)
+            self.after(0, self.log_status, "BATCH PROCESSING COMPLETE!")
+            self.after(0, self.log_status, f"  Successfully processed: {completed_files}/{total_files}")
+            self.after(0, self.log_status, f"  Errors: {total_errors}")
+            self.after(0, self.log_status, "=" * 80)
+            
+            final_summary = f"Batch processing finished.\n\nSuccess: {completed_files}/{total_files}\nErrors: {total_errors}\n\n"
+            final_summary += "Summary:\n" + "\n".join(summary_messages)
+            
+            self.after(0, lambda: messagebox.showinfo("Batch Complete", final_summary))
 
-            finally:
-                self.after(0, lambda: self.run_btn.config(state="normal"))
+            # Re-enable the button
+            self.after(0, lambda: self.run_btn.config(state="normal"))
 
-        # Start worker thread
+        # Start the worker thread
         threading.Thread(target=worker, daemon=True).start()
+
+    def view_report(self):
+        """Start a web server and open the latest HTML report."""
+        if not self.report_path or not os.path.exists(self.report_path):
+            messagebox.showerror("No Report", "No report found. Please run the analysis first.")
+            return
+
+        port = 8123
+        report_dir = os.path.dirname(self.report_path)
+        report_filename = os.path.basename(self.report_path)
+        
+        # Run server in a separate thread
+        server_thread = threading.Thread(
+            target=start_server,
+            args=(report_dir, port),
+            daemon=True
+        )
+        server_thread.start()
+        
+        url = f"http://localhost:{port}/{report_filename}"
+        self.log_status(f"Opening report at: {url}")
+        
+        # Give server a moment to start
+        self.after(1000, lambda: webbrowser.open_new_tab(url))
 
 
 def main():
